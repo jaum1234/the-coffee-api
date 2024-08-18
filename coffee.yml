@@ -19,8 +19,6 @@ paths:
                   properties:
                     name:
                       type: string
-                    description:
-                      type: string
     post:
       requestBody:
         content:
@@ -28,9 +26,9 @@ paths:
             schema:
               type: object
               properties:
+                id:
+                  type: integer
                 name: 
-                  type: string
-                description:
                   type: string
       responses:
         201:
@@ -52,9 +50,9 @@ paths:
               schema:
                 type: object
                 properties:
+                  id:
+                    type: integer
                   name:
-                    type: string
-                  description:
                     type: string
 
   
