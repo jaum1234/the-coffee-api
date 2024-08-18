@@ -2,12 +2,13 @@ package main
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 type brewingMethod struct {
-	ID   int64  `json:"id"`
+	ID   int    `json:"id"`
 	Name string `json:"name"`
 }
 
@@ -35,10 +36,28 @@ func storeBrewingMethod(c *gin.Context) {
 	c.IndentedJSON(http.StatusCreated, brewingMethod)
 }
 
+func getBrewingMethodById(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		return
+	}
+
+	for _, method := range brewingMethods {
+		if method.ID == id {
+			c.IndentedJSON(http.StatusOK, method)
+			return
+		}
+	}
+
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "Brewing method not found."})
+}
+
 func main() {
 	app := gin.Default()
 	app.GET("/brewing-methods", getBrewingMethods)
 	app.POST("/brewing-methods", storeBrewingMethod)
+	app.GET("/brewing-methods/:id", getBrewingMethodById)
 
 	app.Run("localhost:8080")
 }
