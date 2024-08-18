@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: The Coffee API 
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /brewing-methods:
+    get:
+      responses:
+        200:
+          description: List of brewing methods.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: 
+                  type: string
+                description:
+                  type: string
+      responses:
+        201:
+          description: Registration of a new brewiwng method.
+  /brewing-methods/{brewingMethodId}:
+    get:
+      parameters:
+        - name: brewingMethodId
+          in: path
+          required: true
+          schema:
+            type: integer
+          
+      responses:
+        200:
+          description: Information about a single brewing method.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  description:
+                    type: string
+
+  
