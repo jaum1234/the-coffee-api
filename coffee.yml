@@ -17,6 +17,8 @@ paths:
                 items:
                   type: object
                   properties:
+                    id:
+                      type: integer
                     name:
                       type: string
     post:
@@ -26,8 +28,6 @@ paths:
             schema:
               type: object
               properties:
-                id:
-                  type: integer
                 name: 
                   type: string
       responses:
